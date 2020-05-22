@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Karkun</string>
+    <string name="app_title">Karkun</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_home">Orders</string>
+    <string name="title_dashboard">Items</string>
+    <string name="title_notifications">Reports</string>
+
+    <string name="orderState1">Order received by shop.</string>
+    <string name="orderState2">Order accepted by shop.</string>
+    <string name="orderState3">Order out for delivery.</string>
+    <string name="orderState4">Order Delivered.</string>
+</resources>

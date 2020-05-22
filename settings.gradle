@@ -1,0 +1,2 @@
+rootProject.name='Karkun'
+include ':app'

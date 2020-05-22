@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="30dp"
+    tools:context=".CreateShopActivity">
+
+    <fr.castorflex.android.smoothprogressbar.SmoothProgressBar
+        android:id="@+id/progress_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:spb_color="@color/colorPrimaryDark"
+        app:spb_mirror_mode="false"
+        app:spb_progressiveStart_activated="true"
+        app:spb_progressiveStart_speed="1.5"
+        app:spb_progressiveStop_speed="4.0"
+        app:spb_reversed="false"
+        app:spb_sections_count="3"
+        app:spb_speed="2"
+        app:spb_stroke_separator_length="4dp"
+        app:spb_stroke_width="4dp" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/top_img"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:src="@drawable/ic_sb_shop_graphic">
+
+    </androidx.appcompat.widget.AppCompatImageView>
+
+    <TextView
+        android:id="@+id/introText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/top_img"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/josefinsansitalic"
+        android:text="Best in class shopkeeping"
+        android:textColor="@color/textColorDark"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/introText2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/introText"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/josefinsansitalic"
+        android:text="now over the cloud !"
+        android:textColor="@color/textColorDark"
+        android:textSize="18sp">
+
+    </TextView>
+
+    <ScrollView
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/introText2">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/shopId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/josefinsansregular"
+                android:hint="Shop ID"
+                android:inputType="text" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/shopName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/shopId"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/josefinsansregular"
+                android:hint="Shop Name"
+                android:inputType="text" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/shopName"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/josefinsansregular"
+                android:hint="Shop Password"
+                android:inputType="textPassword" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passwordC"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/password"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/josefinsansregular"
+                android:hint="Repeat Password"
+                android:inputType="textPassword" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emailId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/passwordC"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/josefinsansregular"
+                android:hint="Email Id"
+                android:inputType="textEmailAddress" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/phoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/emailId"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/josefinsansregular"
+                android:hint="Phone Number"
+                android:inputType="phone" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/gstn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/phoneNumber"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/josefinsansregular"
+                android:hint="GSTN"
+                android:inputType="" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/istn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/gstn"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/josefinsansregular"
+                android:hint="ISTN"
+                android:inputType="" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/pan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/istn"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/josefinsansregular"
+                android:hint="PAN"
+                android:inputType="" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pan"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/josefinsansregular"
+                android:hint="Address"
+                android:inputType="" />
+
+            <Button
+                android:id="@+id/createShop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/address"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/round_btn"
+                android:fontFamily="@font/josefinsansregular"
+                android:text="Create Shop"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                android:textSize="20sp" />
+        </RelativeLayout>
+    </ScrollView>
+
+
+
+</RelativeLayout>
