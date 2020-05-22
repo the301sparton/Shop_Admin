@@ -8,4 +8,9 @@
         <item name="colorAccent">@color/textColorDark</item>
     </style>
 
+    <style name="Widget.BottomNavigationView"
+        parent="Widget.Design.BottomNavigationView">
+        <item name="fontFamily">@font/josefinsans</item>
+    </style>
+
 </resources>

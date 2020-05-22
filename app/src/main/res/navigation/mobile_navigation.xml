@@ -9,7 +9,7 @@
         android:id="@+id/navigation_home"
         android:name="com.vaicomp.karkun.ui.Orders.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_shop" />
+        tools:layout="@layout/fragment_order" />
 
     <fragment
         android:id="@+id/navigation_dashboard"

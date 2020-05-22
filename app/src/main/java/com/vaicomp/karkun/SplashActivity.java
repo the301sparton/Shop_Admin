@@ -160,9 +160,7 @@ public class SplashActivity extends AppCompatActivity {
         else{
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             preferences.edit().clear().apply();
-            if(!false) {
-                Toasty.error(getApplicationContext(), "Sign-In Failed :(", Toasty.LENGTH_LONG).show();
-            }
+            Toasty.error(getApplicationContext(), "Sign-In Failed :(", Toasty.LENGTH_LONG).show();
         }
     }
 
