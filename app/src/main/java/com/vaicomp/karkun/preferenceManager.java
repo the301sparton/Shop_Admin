@@ -26,7 +26,7 @@ public class preferenceManager {
         return sharedPreferences.getString("UID","");
     }
 
-    static void setItemState(Context context, String itemState){
+   public static void setItemState(Context context, String itemState){
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         sharedPreferences.edit().putString("itemState", itemState).apply();
     }

@@ -10,4 +10,9 @@
     <string name="orderState2">Order accepted by shop.</string>
     <string name="orderState3">Order out for delivery.</string>
     <string name="orderState4">Order Delivered.</string>
+
+
+    <string name="orderInCart">Order is in cart.</string>
+    <string name="placeOrder">Place Order</string>
+    <string name="order_not_placed">NA (Available when order is placed)</string>
 </resources>

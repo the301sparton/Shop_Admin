@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.vaicomp.karkun.CartActivity;
 import com.vaicomp.karkun.Modals.OrderModal;
 import com.vaicomp.karkun.OrderState;
 import com.vaicomp.karkun.R;
@@ -29,7 +30,6 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
 
     class HistoryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView uname, address, itemsCount, amount, orderedOn, orderState;
-        LinearLayout repeatOrder;
         RelativeLayout base;
 
         HistoryViewHolder(View view) {
@@ -95,7 +95,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
     }
 
     private void viewOrderFunction(final int pos) {
-        context.startActivity(new Intent(context, OrderState.class)
+        context.startActivity(new Intent(context, CartActivity.class)
                 .putExtra("ORDER_ID", cartItems.get(pos).getOrderId()));
     }
 

@@ -15,7 +15,7 @@
         android:id="@+id/navigation_dashboard"
         android:name="com.vaicomp.karkun.ui.Items.DashboardFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_history" />
+        tools:layout="@layout/fragment_items" />
 
     <fragment
         android:id="@+id/navigation_notifications"
