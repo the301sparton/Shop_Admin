@@ -9,10 +9,17 @@
     <string name="orderState1">Order received by shop.</string>
     <string name="orderState2">Order accepted by shop.</string>
     <string name="orderState3">Order out for delivery.</string>
-    <string name="orderState4">Order Delivered.</string>
-
 
     <string name="orderInCart">Order is in cart.</string>
     <string name="placeOrder">Place Order</string>
     <string name="order_not_placed">NA (Available when order is placed)</string>
+    <string name="orderState0">Order Cancelled</string>
+    <string name="orderState4">Order Delivered</string>
+
+
+    <string-array name="planets_array">
+        <item>Order Time</item>
+        <item>Order State</item>
+        <item>User</item>
+    </string-array>
 </resources>

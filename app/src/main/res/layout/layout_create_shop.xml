@@ -29,7 +29,7 @@
         android:id="@+id/top_img"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:src="@drawable/ic_sb_shop_graphic">
+        app:srcCompat="@drawable/ic_sb_shop_graphic">
 
     </androidx.appcompat.widget.AppCompatImageView>
 

@@ -7,7 +7,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -33,11 +37,13 @@ public class HomeFragment extends Fragment {
 
     private RecyclerView listView;
     private List<OrderModal> list;
+    private TextView sortingByText;
     private LinearLayout loader;
+    private HistoryAdapter adapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-       View root = inflater.inflate(R.layout.fragment_order, container, false);
+        View root = inflater.inflate(R.layout.fragment_order, container, false);
         list = new ArrayList<>();
 
         listView = root.findViewById(R.id.list);
@@ -45,6 +51,7 @@ public class HomeFragment extends Fragment {
         loader = root.findViewById(R.id.loader);
         loader.setVisibility(View.VISIBLE);
         listView.setVisibility(View.GONE);
+        sortingByText  = root.findViewById(R.id.sortingByText);
 
         listView.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
@@ -67,6 +74,69 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
+
+
+
+
+
+        Spinner spinner = root.findViewById(R.id.sortType);
+
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(requireContext(),
+                R.array.planets_array, android.R.layout.simple_spinner_item);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(spinnerAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String type = String.valueOf(parent.getItemAtPosition(position));
+                switch (type) {
+                    case "Order Time":
+                        sortingByText.setText("Sorted By : Order Time");
+                        Collections.sort(list, new Comparator<OrderModal>() {
+                            @Override
+                            public int compare(OrderModal o1, OrderModal o2) {
+                                return o2.getDate().compareTo(o1.getDate());
+                            }
+                        });
+                        break;
+                    case "Order State":
+                        sortingByText.setText("Sorted By : Order State");
+                        Collections.sort(list, new Comparator<OrderModal>() {
+                            @Override
+                            public int compare(OrderModal o1, OrderModal o2) {
+                                return String.valueOf(o2.getState()).compareTo(String.valueOf(o1.getState()));
+                            }
+                        });
+                        break;
+                    case "User":
+                        sortingByText.setText("Sorted By : User");
+                        Collections.sort(list, new Comparator<OrderModal>() {
+                            @Override
+                            public int compare(OrderModal o1, OrderModal o2) {
+                                return o2.getUid().compareTo(o1.getUid());
+                            }
+                        });
+                        break;
+                }
+                if(adapter != null){
+                    adapter.notifyDataSetChanged();
+                }
+                else {
+                    adapter = new HistoryAdapter(list, getActivity());
+                    RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+                    listView.setLayoutManager(mLayoutManager);
+
+                    listView.setItemAnimator(new DefaultItemAnimator());
+                    listView.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+
+        });
         return root;
     }
 
@@ -74,7 +144,7 @@ public class HomeFragment extends Fragment {
     public void onResume() {
         super.onResume();
         final FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("orders").whereLessThanOrEqualTo("state", 3).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        db.collection("orders").whereLessThanOrEqualTo("state", 4).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 list.clear();
@@ -85,7 +155,7 @@ public class HomeFragment extends Fragment {
                     Log.i("OBJ: ", String.valueOf(orderModal));
                 }
 
-                if(queryDocumentSnapshots.size() > 0) {
+                if (queryDocumentSnapshots.size() > 0) {
 
                     Collections.sort(list, new Comparator<OrderModal>() {
                         @Override
@@ -94,12 +164,17 @@ public class HomeFragment extends Fragment {
                         }
                     });
 
-                    HistoryAdapter adapter = new HistoryAdapter(list, getActivity());
-                    RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-                    listView.setLayoutManager(mLayoutManager);
+                    if (adapter == null) {
+                        adapter = new HistoryAdapter(list, getActivity());
+                        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+                        listView.setLayoutManager(mLayoutManager);
 
-                    listView.setItemAnimator(new DefaultItemAnimator());
-                    listView.setAdapter(adapter);
+                        listView.setItemAnimator(new DefaultItemAnimator());
+                        listView.setAdapter(adapter);
+                    }
+                    else {
+                        adapter.notifyDataSetChanged();
+                    }
                 }
 
                 listView.setVisibility(View.VISIBLE);
@@ -107,4 +182,5 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+
 }

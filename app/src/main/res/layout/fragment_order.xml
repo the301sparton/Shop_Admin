@@ -6,9 +6,34 @@
     android:padding="10dp">
 
 
+    <LinearLayout
+        android:id="@+id/sortedByView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:weightSum="10"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/sortingByText"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/josefinsans"
+            android:textColor="#000"
+            android:text="Sorted By: Order Time"/>
+
+        <Spinner
+            android:id="@+id/sortType"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"/>
+
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
+        android:layout_below="@id/sortedByView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="20dp"

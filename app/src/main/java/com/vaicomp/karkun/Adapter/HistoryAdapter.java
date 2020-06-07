@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -15,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.vaicomp.karkun.CartActivity;
 import com.vaicomp.karkun.Modals.OrderModal;
-import com.vaicomp.karkun.OrderState;
 import com.vaicomp.karkun.R;
 
 import java.text.SimpleDateFormat;
@@ -83,13 +81,21 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
         holder.amount.setText(String.valueOf(item.getGrandTotal()));
 
         if (item.getState() == 1) {
+            holder.orderState.setTextColor(context.getResources().getColor(R.color.normalColor));
             holder.orderState.setText(context.getString(R.string.orderState1));
         } else if (item.getState() == 2) {
+            holder.orderState.setTextColor(context.getResources().getColor(R.color.normalColor));
             holder.orderState.setText(context.getString(R.string.orderState2));
         } else if (item.getState() == 3) {
+            holder.orderState.setTextColor(context.getResources().getColor(R.color.normalColor));
             holder.orderState.setText(context.getString(R.string.orderState3));
         } else if (item.getState() == 4) {
             holder.orderState.setText(context.getString(R.string.orderState4));
+            holder.orderState.setTextColor(context.getResources().getColor(R.color.successColor));
+        }
+        else if(item.getState() == 0){
+            holder.orderState.setTextColor(context.getResources().getColor(R.color.errorColor));
+            holder.orderState.setText(context.getString(R.string.orderState0));
         }
 
     }

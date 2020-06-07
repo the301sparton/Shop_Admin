@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/lib/com.vaicomp.shopclient"
+    xmlns:app2="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:padding="10dp"
@@ -38,17 +39,6 @@
                 android:background="@drawable/ic_delete_text" />
 
         </FrameLayout>
-
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/filterBtn"
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:padding="5dp"
-            app:srcCompact="@drawable/ic_settings"
-            android:src="@drawable/ic_settings"
-            android:layout_height="match_parent"/>
-
     </LinearLayout>
 
     <LinearLayout
@@ -79,5 +69,13 @@
         android:layout_height="match_parent"
         android:layout_below="@id/filterBar" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        app2:srcCompat="@drawable/ic_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="16dp" />
 
 </RelativeLayout>

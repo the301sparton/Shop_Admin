@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.vaicomp.karkun">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,9 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CartActivity"></activity>
         <activity
-            android:name=".OrderState"
+            android:name=".UpdateBannerActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".CartActivity" />
+        <activity
+            android:name=".ItemViewActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".CreateShopActivity"

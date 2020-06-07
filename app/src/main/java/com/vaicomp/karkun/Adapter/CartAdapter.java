@@ -60,9 +60,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     }
 
-    public List<CartItem> getAdapterData(){
-        return  cartItems;
-    }
 
     @Override
     public int getItemCount() {

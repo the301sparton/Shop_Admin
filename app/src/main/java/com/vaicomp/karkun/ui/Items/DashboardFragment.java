@@ -2,6 +2,7 @@ package com.vaicomp.karkun.ui.Items;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -22,11 +23,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.vaicomp.karkun.Adapter.ItemAdapter;
+import com.vaicomp.karkun.ItemViewActivity;
 import com.vaicomp.karkun.R;
 import com.vaicomp.karkun.db.AppDataBase;
 import com.vaicomp.karkun.db.ShopItem;
@@ -110,6 +113,14 @@ public class DashboardFragment extends Fragment {
             }
         });
 
+
+        FloatingActionButton fab = root.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               startActivity(new Intent(getActivity(), ItemViewActivity.class).putExtra("ITEM_ID","NA"));
+            }
+        });
 
         return root;
     }

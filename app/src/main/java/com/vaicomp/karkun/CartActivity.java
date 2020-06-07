@@ -1,6 +1,8 @@
 package com.vaicomp.karkun;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -66,28 +68,28 @@ public class CartActivity extends AppCompatActivity {
             public void onClick(View v) {
                 placeOrderBtn.setEnabled(false);
                 final Context context = getApplicationContext();
-                if (omGlobal.getState() == 2 || omGlobal.getState() == 1) {
-                    fdb.collection("orders").document(order_id)
-                            .delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                if (omGlobal.getState() == 1) {
+                    fdb.collection("orders").document(order_id).update("state", 2).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
                             placeOrderBtn.setEnabled(true);
-                            Toasty.success(context, "Order Canceled Successfully", Toasty.LENGTH_SHORT).show();
-                            finish();
+                            initViews(order_id);
+                            Toasty.success(context, "Order State Changed").show();
+                        }
+                    });
+                } else if (omGlobal.getState() == 2) {
+                    fdb.collection("orders").document(order_id).update("state", 3).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            placeOrderBtn.setEnabled(true);
+                            initViews(order_id);
+                            Toasty.success(context, "Order State Changed").show();
                         }
                     });
                 } else if (omGlobal.getState() == 3) {
-
-                    fdb.collection("orders").document(order_id).update("state", 4).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            Toasty.success(getApplicationContext(), "Order Received", Toasty.LENGTH_SHORT).show();
-                            placeOrderBtn.setText(getString(R.string.orderState4));
-                            placeOrderBtn.setEnabled(false);
-                            TextView tv = findViewById(R.id.orderState);
-                            tv.setText(getString(R.string.orderState4));
-                        }
-                    });
+                    Intent callIntent = new Intent(Intent.ACTION_DIAL);
+                    callIntent.setData(Uri.parse("tel:" + omGlobal.getPhoneNumber()));
+                    startActivity(callIntent);
                 }
 
             }
@@ -142,17 +144,14 @@ public class CartActivity extends AppCompatActivity {
 
                     tv = findViewById(R.id.orderState);
                     if (orderModal.getState() == 1) {
-                        placeOrderBtn.setText("Cancel Order");
+                        placeOrderBtn.setText("Accept Order");
                         tv.setText(getString(R.string.orderState1));
                     } else if (orderModal.getState() == 2) {
-                        placeOrderBtn.setText("Cancel Order");
+                        placeOrderBtn.setText("Mark Out For Delivery");
                         tv.setText(getString(R.string.orderState2));
                     } else if (orderModal.getState() == 3) {
-                        placeOrderBtn.setText("Confirm Delivery");
+                        placeOrderBtn.setText("Call Client");
                         tv.setText(getString(R.string.orderState3));
-                    } else if (orderModal.getState() == 4) {
-                        placeOrderBtn.setText("Order Delivered.");
-                        tv.setText(getString(R.string.orderState4));
                     }
 
                     baseView.setVisibility(View.VISIBLE);
@@ -165,7 +164,7 @@ public class CartActivity extends AppCompatActivity {
 
 
     public static class CustomGridLayoutManager extends LinearLayoutManager {
-        public CustomGridLayoutManager(Context context) {
+        CustomGridLayoutManager(Context context) {
             super(context);
         }
 
