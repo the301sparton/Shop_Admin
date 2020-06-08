@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +42,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class ReportFragment extends Fragment {
@@ -48,6 +50,7 @@ public class ReportFragment extends Fragment {
     private FirebaseFirestore db;
     private List<OrderModal> orderList;
     static EditText startDate;
+    static Date sdate, edate;
     static EditText endDate;
     private RecyclerView listView;
 
@@ -136,8 +139,17 @@ public class ReportFragment extends Fragment {
                                 Double userAmount = 0.0;
                                 for(OrderModal modal : orderList){
                                     if(user.equals(modal.getUname())){
-                                        userAmount += modal.getGrandTotal();
-                                        count++;
+                                        if(!startDate.getText().toString().equals("") && !endDate.getText().toString().equals("")){
+                                            Log.i("actualDate", String.valueOf(modal.getDate() +" ---- "+ sdate +"-----"+ edate));
+                                            if(modal.getDate().after(sdate) && modal.getDate().before(edate)){
+                                                userAmount += modal.getGrandTotal();
+                                                count++;
+                                            }
+                                        }else{
+                                            userAmount += modal.getGrandTotal();
+                                            count++;
+                                        }
+
                                     }
                                 }
                                 ReportModal reportModal = new ReportModal();
@@ -165,8 +177,16 @@ public class ReportFragment extends Fragment {
                                 for(OrderModal modal : orderList){
                                     for(CartItem cartItem : modal.getItemList()){
                                         if(user.equals(cartItem.getItemName())){
-                                            count += cartItem.getQuantity();
-                                            userAmount += cartItem.getAmount();
+                                            if(!startDate.getText().toString().equals("") && !endDate.getText().toString().equals("")){
+                                                Log.i("actualDate", String.valueOf(modal.getDate() +" ---- "+ sdate +"-----"+ edate));
+                                                if(modal.getDate().after(sdate) && modal.getDate().before(edate)){
+                                                    userAmount += modal.getGrandTotal();
+                                                    count++;
+                                                }
+                                            }else{
+                                                userAmount += modal.getGrandTotal();
+                                                count++;
+                                            }
                                         }
                                     }
                                 }
@@ -185,6 +205,8 @@ public class ReportFragment extends Fragment {
                                 return o2.getAmount().compareTo(o1.getAmount());
                             }
                         });
+
+
 
                         // We have the processed list here
                         ReportAdapter adapter = new ReportAdapter(filteredList);
@@ -228,6 +250,7 @@ public class ReportFragment extends Fragment {
             int year = c.get(Calendar.YEAR);
             int month = c.get(Calendar.MONTH);
             int day = c.get(Calendar.DAY_OF_MONTH);
+            Log.i("sdate", String.valueOf(sdate));
             DatePickerDialog datePickerDialog;
             datePickerDialog = new DatePickerDialog(getActivity(),this, year,
                     month,day);
@@ -236,7 +259,9 @@ public class ReportFragment extends Fragment {
 
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
-            // Do something with the date chosen by the user
+            // Do something with the date chosen by the use
+            sdate = new GregorianCalendar(year, month , day,0,0).getTime();
+            Log.i("sDate", String.valueOf(sdate));
             startDate.setText(day + "/" + month  + "/" + year);
         }
 
@@ -262,10 +287,11 @@ public class ReportFragment extends Fragment {
             c.set(year,month,day+1);
             DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),this, year,month,day);
             datePickerDialog.getDatePicker().setMinDate(c.getTimeInMillis());
-            return datePickerDialog;
+             return datePickerDialog;
         }
         public void onDateSet(DatePicker view, int year, int month, int day) {
-
+            edate = new GregorianCalendar(year, month, day,0,0).getTime();
+            Log.i("edate", String.valueOf(edate));
             endDate.setText(day + "/" + month  + "/" + year);
         }
     }

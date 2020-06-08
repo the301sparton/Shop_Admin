@@ -1,5 +1,7 @@
 package com.vaicomp.karkun.db;
 
+import java.util.Date;
+
 public class ReportModal {
     private String name;
    private Double amount;
