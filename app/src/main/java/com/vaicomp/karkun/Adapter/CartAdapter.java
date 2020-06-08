@@ -18,8 +18,6 @@ import java.util.List;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
     private List<CartItem> cartItems;
-    private int type;
-    private Activity context;
 
     static class CartViewHolder extends RecyclerView.ViewHolder {
         TextView itemName, rateQ, amount;
@@ -37,8 +35,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     public CartAdapter(List<CartItem> moviesList, int type, Activity context) {
         this.cartItems = moviesList;
-        this.context = context;
-        this.type = type;
     }
 
     @NonNull

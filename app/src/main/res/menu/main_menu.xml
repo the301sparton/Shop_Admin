@@ -9,6 +9,10 @@
         android:title="Change Banner"/>
 
     <item
+        android:id="@+id/create_category"
+        android:title="Create Category"/>
+
+    <item
         android:id="@+id/logOut"
         android:title="Logout"/>
 </menu>

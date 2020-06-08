@@ -58,6 +58,9 @@ public class HomeActivity extends AppCompatActivity {
         else if(item.getItemId() == R.id.upload_banner){
             startActivity(new Intent(HomeActivity.this, UpdateBannerActivity.class));
         }
+        else if(item.getItemId() == R.id.create_category){
+            startActivity(new Intent(HomeActivity.this, CreateCategoryActivity.class));
+        }
 
         return super.onOptionsItemSelected(item);
     }
