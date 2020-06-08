@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.Reports.NotificationsFragment">
+
+    <RelativeLayout
+        android:id="@+id/headBar"
+        android:background="@drawable/curve_white_no_border"
+        android:layout_width="match_parent"
+        android:elevation="2dp"
+        android:padding="10dp"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/reportTypeBar"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10">
+        <TextView
+            android:padding="10dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:text="Report Type : "
+            android:fontFamily="@font/josefinsans"
+            android:textSize="18sp"
+            android:textColor="#000"/>
+        <Spinner
+            android:id="@+id/reportTypePicker"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="6"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/DateBar"
+        android:layout_below="@id/reportTypeBar"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10">
+        <EditText
+            android:id="@+id/startDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:hint="Start Date"/>
+
+        <EditText
+            android:id="@+id/endDate"
+            android:layout_marginStart="10dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:hint="End Date"/>
+
+    </LinearLayout>
+
+        <Button
+            android:id="@+id/getReportBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_btn"
+            android:text="GO"
+            android:textColor="#FFF"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/DateBar"/>
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list"
+        android:layout_below="@id/headBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:scrollbars="vertical" />
+
+
+    <LinearLayout
+        android:id="@+id/loader"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/josefinsans"
+            android:gravity="center"
+            android:text="Loading.."
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
+            android:textStyle="italic" />
+
+    </LinearLayout>
+</RelativeLayout>

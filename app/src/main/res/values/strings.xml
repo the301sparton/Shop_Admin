@@ -22,4 +22,10 @@
         <item>Order State</item>
         <item>User</item>
     </string-array>
+
+
+    <string-array name="reportTypes">
+        <item>User Report</item>
+        <item>Item Report</item>
+    </string-array>
 </resources>
