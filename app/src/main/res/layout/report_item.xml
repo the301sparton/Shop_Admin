@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:id="@+id/itemParent"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:background="@drawable/curve_white_no_border"
+android:elevation="2dp"
+android:padding="5dp">
+
+    <TextView
+        android:id="@+id/itemName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/josefinsans"
+        android:text="Chaitanya Deshpande"
+        android:textColor="#000"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/itemRate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/itemName"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/josefinsans"
+        android:text="Amount: 30000"
+        android:textColor="@color/successColor"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/itemQuantity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/itemRate"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/josefinsans"
+        android:text="Quantity: 10 Orders"
+        android:textColor="@color/colorPrimary_a"
+        android:textSize="16sp" />
+</RelativeLayout>
