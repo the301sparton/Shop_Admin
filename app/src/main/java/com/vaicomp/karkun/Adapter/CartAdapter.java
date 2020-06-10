@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.vaicomp.karkun.Modals.CartItem;
 import com.vaicomp.karkun.R;
+import com.vaicomp.karkun.ui.Reports.ReportFragment;
 
 import java.text.MessageFormat;
 import java.util.List;
@@ -52,8 +53,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         CartItem item = cartItems.get(position);
         holder.itemName.setText(item.getItemName());
         holder.rateQ.setText(MessageFormat.format("{0} X ₹ {1}", item.getQuantity(), item.getRate()));
-        holder.amount.setText(String.format("₹ %s", item.getRate() * item.getQuantity()));
-
+        holder.amount.setText(String.format("₹ %s", ReportFragment.round(item.getRate() * item.getQuantity(),2)));
     }
 
 

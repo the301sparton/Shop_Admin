@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.vaicomp.karkun.CartActivity;
 import com.vaicomp.karkun.Modals.OrderModal;
 import com.vaicomp.karkun.R;
+import com.vaicomp.karkun.ui.Reports.ReportFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -78,7 +79,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
                 new SimpleDateFormat(pattern, new Locale("en", "IN"));
 
         holder.orderedOn.setText(simpleDateFormat.format(item.getDate()));
-        holder.amount.setText(String.valueOf(item.getGrandTotal()));
+        holder.amount.setText(String.valueOf(ReportFragment.round(item.getGrandTotal(),2)));
 
         if (item.getState() == 1) {
             holder.orderState.setTextColor(context.getResources().getColor(R.color.normalColor));

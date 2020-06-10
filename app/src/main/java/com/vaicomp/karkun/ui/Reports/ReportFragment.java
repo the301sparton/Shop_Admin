@@ -37,6 +37,7 @@ import com.vaicomp.karkun.db.ShopItem;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -262,7 +263,8 @@ public class ReportFragment extends Fragment {
             // Do something with the date chosen by the use
             sdate = new GregorianCalendar(year, month , day,0,0).getTime();
             Log.i("sDate", String.valueOf(sdate));
-            startDate.setText(day + "/" + month  + "/" + year);
+            String date = new SimpleDateFormat("dd-MM-yyyy").format(sdate);
+            startDate.setText(date);
         }
 
     }
@@ -277,11 +279,11 @@ public class ReportFragment extends Fragment {
             Date date = new Date();
             int year = date.getYear(),month = date.getMonth(),day = date.getDay();
             if(!getfromdate.equals("")){
-                String getfrom[] = getfromdate.split("/");
-                year= Integer.parseInt(getfrom[2]);
-                month = Integer.parseInt(getfrom[1]);
-                day = Integer.parseInt(getfrom[0]);
-
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(sdate);
+                year = calendar.get(Calendar.YEAR);
+                month = calendar.get(Calendar.MONTH);
+                day = calendar.get(Calendar.DAY_OF_MONTH);
             }
             final Calendar c = Calendar.getInstance();
             c.set(year,month,day+1);
@@ -292,7 +294,9 @@ public class ReportFragment extends Fragment {
         public void onDateSet(DatePicker view, int year, int month, int day) {
             edate = new GregorianCalendar(year, month, day,0,0).getTime();
             Log.i("edate", String.valueOf(edate));
-            endDate.setText(day + "/" + month  + "/" + year);
+            String date = new SimpleDateFormat("dd-MM-yyyy").format(edate);
+            System.out.println("Date object value: "+date);
+            endDate.setText(date);
         }
     }
 }

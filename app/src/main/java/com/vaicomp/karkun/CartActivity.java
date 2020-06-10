@@ -22,6 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.vaicomp.karkun.Adapter.CartAdapter;
 import com.vaicomp.karkun.Modals.OrderModal;
 import com.vaicomp.karkun.db.AppDataBase;
+import com.vaicomp.karkun.ui.Reports.ReportFragment;
 
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
@@ -119,10 +120,10 @@ public class CartActivity extends AppCompatActivity {
 
 
                     TextView tv = findViewById(R.id.itemTotal);
-                    tv.setText(MessageFormat.format("₹ {0}", orderModal.getItemTotal()));
+                    tv.setText(MessageFormat.format("₹ {0}", ReportFragment.round(orderModal.getItemTotal(),2)));
 
                     tv = findViewById(R.id.totalAmount);
-                    tv.setText(String.format("₹ %s", orderModal.getItemTotal() + orderModal.getDeliveryCost()));
+                    tv.setText(String.format("₹ %s", ReportFragment.round(orderModal.getItemTotal() + orderModal.getDeliveryCost() , 2)));
 
                     tv = findViewById(R.id.orderNumber);
                     tv.setText(order_id);
