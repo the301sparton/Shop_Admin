@@ -179,14 +179,13 @@ public class ReportFragment extends Fragment {
                                     for(CartItem cartItem : modal.getItemList()){
                                         if(user.equals(cartItem.getItemName())){
                                             if(!startDate.getText().toString().equals("") && !endDate.getText().toString().equals("")){
-                                                Log.i("actualDate", String.valueOf(modal.getDate() +" ---- "+ sdate +"-----"+ edate));
                                                 if(modal.getDate().after(sdate) && modal.getDate().before(edate)){
-                                                    userAmount += modal.getGrandTotal();
-                                                    count++;
+                                                    userAmount += cartItem.getAmount();
+                                                    count+= cartItem.getQuantity();
                                                 }
                                             }else{
-                                                userAmount += modal.getGrandTotal();
-                                                count++;
+                                                userAmount += cartItem.getAmount();
+                                                count+= cartItem.getQuantity();
                                             }
                                         }
                                     }

@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +28,7 @@ import com.vaicomp.karkun.ui.Reports.ReportFragment;
 
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Locale;
 
 import es.dmoral.toasty.Toasty;
@@ -41,6 +44,8 @@ public class CartActivity extends AppCompatActivity {
     String order_id;
     ScrollView baseView;
     LinearLayout loader;
+    Spinner slot;
+    ArrayList<String> spinnerArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,12 +61,24 @@ public class CartActivity extends AppCompatActivity {
         baseView.setVisibility(View.GONE);
 
         order_id = getIntent().getStringExtra("ORDER_ID");
+        slot = findViewById(R.id.slotValue);
 
         fdb = FirebaseFirestore.getInstance();
         placeOrderBtn = findViewById(R.id.placeOrderBtn);
 
-
-        initViews(order_id);
+        fdb.collection("shopDetails").document("/d1ajtkwauTOe8z27xdH8").get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                spinnerArray = new ArrayList<>();
+                spinnerArray = (ArrayList<String>) documentSnapshot.get("slots");
+                ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>
+                        (getApplicationContext(), android.R.layout.simple_spinner_item,
+                                spinnerArray);
+                slot.setAdapter(spinnerArrayAdapter);
+                slot.setSelection(spinnerArray.size() - 1);
+                initViews(order_id);
+            }
+        });
 
 
         placeOrderBtn.setOnClickListener(new View.OnClickListener() {
@@ -120,10 +137,10 @@ public class CartActivity extends AppCompatActivity {
 
 
                     TextView tv = findViewById(R.id.itemTotal);
-                    tv.setText(MessageFormat.format("₹ {0}", ReportFragment.round(orderModal.getItemTotal(),2)));
+                    tv.setText(MessageFormat.format("₹ {0}", ReportFragment.round(orderModal.getItemTotal(), 2)));
 
                     tv = findViewById(R.id.totalAmount);
-                    tv.setText(String.format("₹ %s", ReportFragment.round(orderModal.getItemTotal() + orderModal.getDeliveryCost() , 2)));
+                    tv.setText(String.format("₹ %s", ReportFragment.round(orderModal.getItemTotal() + orderModal.getDeliveryCost(), 2)));
 
                     tv = findViewById(R.id.orderNumber);
                     tv.setText(order_id);
@@ -136,6 +153,17 @@ public class CartActivity extends AppCompatActivity {
 
                     tv = findViewById(R.id.phoneNumberValue);
                     tv.setText(omGlobal.getPhoneNumber());
+
+                    int position = 0, i = 0;
+                    for(String slotName : spinnerArray){
+                        if(slotName.equals(orderModal.getOrderSlot())){
+                            position = i;
+                            break;
+                        }
+                        i++;
+                    }
+                    slot.setSelection(position);
+                    slot.setEnabled(false);
 
                     tv = findViewById(R.id.Date);
                     String pattern = "MMMM dd, yyyy hh:mm a";

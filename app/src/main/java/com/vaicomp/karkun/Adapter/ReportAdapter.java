@@ -51,8 +51,8 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
     public void onBindViewHolder(ReportViewHolder holder, final int position) {
         ReportModal item = cartItems.get(position);
         holder.itemName.setText(item.getName());
-        holder.quantity.setText(MessageFormat.format("Amount: {0}", item.getQuantity()));
-        holder.amount.setText(MessageFormat.format("Quantity: {0}", item.getAmount()));
+        holder.quantity.setText(MessageFormat.format("Quantity: {0}", item.getQuantity()));
+        holder.amount.setText(MessageFormat.format("Amount: {0}", item.getAmount()));
     }
 
 

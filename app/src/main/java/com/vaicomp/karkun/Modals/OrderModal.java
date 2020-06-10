@@ -1,5 +1,7 @@
 package com.vaicomp.karkun.Modals;
 
+import com.vaicomp.karkun.Modals.CartItem;
+
 import java.util.Date;
 import java.util.List;
 
@@ -7,6 +9,7 @@ public class OrderModal {
     private List<CartItem> itemList;
     private Double itemTotal, deliveryCost, grandTotal;
     private int state;
+    private String orderSlot;
     private String orderId, deliveryAddress, phoneNumber, uid, uname, shopId;
     private Date date;
 
@@ -107,5 +110,13 @@ public class OrderModal {
 
     public void setShopId(String shopId) {
         this.shopId = shopId;
+    }
+
+    public String getOrderSlot() {
+        return orderSlot;
+    }
+
+    public void setOrderSlot(String orderSlot) {
+        this.orderSlot = orderSlot;
     }
 }
