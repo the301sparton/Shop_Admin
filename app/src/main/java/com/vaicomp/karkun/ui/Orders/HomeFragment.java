@@ -99,14 +99,27 @@ public class HomeFragment extends Fragment {
                             }
                         });
                         break;
-                    case "Order State":
+                    case "Order Status":
                         sortingByText.setText("Sorted By : Order State");
-                        Collections.sort(list, new Comparator<OrderModal>() {
+                        List<OrderModal> l1 = new ArrayList<>();
+                        l1.addAll(list);
+                        Collections.sort(l1, new Comparator<OrderModal>() {
                             @Override
                             public int compare(OrderModal o1, OrderModal o2) {
-                                return String.valueOf(o2.getState()).compareTo(String.valueOf(o1.getState()));
+                                return String.valueOf(o1.getState()).compareTo(String.valueOf(o2.getState()));
                             }
                         });
+                        list.clear();
+                        for( OrderModal o : l1){
+                            if(o.getState() > 0){
+                                list.add(o);
+                            }
+                        }
+                        for( OrderModal o : l1){
+                            if(o.getState() == 0){
+                                list.add(o);
+                            }
+                        }
                         break;
                     case "User":
                         sortingByText.setText("Sorted By : User");

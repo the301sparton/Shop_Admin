@@ -40,7 +40,7 @@ public class CartActivity extends AppCompatActivity {
     AppDataBase db;
     FirebaseFirestore fdb;
     OrderModal omGlobal;
-    Button placeOrderBtn;
+    Button placeOrderBtn, cancleBtn;
     String order_id;
     ScrollView baseView;
     LinearLayout loader;
@@ -56,6 +56,7 @@ public class CartActivity extends AppCompatActivity {
 
 
         baseView = findViewById(R.id.baseView);
+        cancleBtn = findViewById(R.id.cancleBtn);
         loader = findViewById(R.id.loader);
         loader.setVisibility(View.VISIBLE);
         baseView.setVisibility(View.GONE);
@@ -113,6 +114,24 @@ public class CartActivity extends AppCompatActivity {
             }
         });
 
+        cancleBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loader.setVisibility(View.VISIBLE);
+                baseView.setVisibility(View.GONE);
+                fdb.collection("orders").document(order_id)
+                        .update("state",0).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        placeOrderBtn.setEnabled(true);
+                        baseView.setVisibility(View.VISIBLE);
+                        loader.setVisibility(View.GONE);
+                        Toasty.success(getApplicationContext(), "Order Canceled Successfully", Toasty.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
 
     }
 
@@ -147,6 +166,9 @@ public class CartActivity extends AppCompatActivity {
 
                     tv = findViewById(R.id.clientName);
                     tv.setText(omGlobal.getUname());
+
+                    tv = findViewById(R.id.deliveryCharges);
+                    tv.setText(String.valueOf(omGlobal.getDeliveryCost()));
 
                     tv = findViewById(R.id.clientAddress);
                     tv.setText(omGlobal.getDeliveryAddress());

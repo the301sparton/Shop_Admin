@@ -313,18 +313,41 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"/>
 
-            <Button
-                android:id="@+id/placeOrderBtn"
-                android:layout_marginTop="25dp"
-                android:layout_marginBottom="25dp"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:gravity="center"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/josefinsans"
+                android:orientation="horizontal"
                 android:layout_below="@id/seprator3"
-                android:background="@drawable/round_btn"
-                android:textColor="#fff"
-                android:textSize="16sp"/>
+                android:weightSum="10">
+
+                <Button
+                    android:id="@+id/cancleBtn"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="25dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="5"
+                    android:gravity="center"
+                    android:text="Cancel Order"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/josefinsans"
+                    android:background="@drawable/round_btn_white"
+                    android:textSize="14sp"/>
+
+                <Button
+                    android:id="@+id/placeOrderBtn"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="25dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="5"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/josefinsans"
+                    android:background="@drawable/round_btn"
+                    android:textColor="#fff"
+                    android:textSize="14sp"/>
+
+            </LinearLayout>
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>
